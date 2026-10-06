@@ -38,9 +38,16 @@ const UI = (() => {
   }
 
   /* ---------- total chips (bump on change / 21 / bust) ---------- */
+  function ensureSpan(node) { // defensive: every total-chip must own a <span> before animating
+    if (!node || !node.querySelector) return null;
+    let span = node.querySelector('span');
+    if (!span) { span = document.createElement('span'); node.appendChild(span); }
+    return span;
+  }
   function setTotal(chipEl, value, opts = {}) {
-    const span = chipEl.querySelector('span');
-    animateNumber(span, value);
+    if (!chipEl || !chipEl.classList) return;
+    const span = ensureSpan(chipEl);
+    if (span) animateNumber(span, value);
     chipEl.classList.remove('bump', 'gold-bump', 'red-bump');
     void chipEl.offsetWidth;
     if (opts.bust) chipEl.classList.add('red-bump');
@@ -266,6 +273,7 @@ const UI = (() => {
       case 'DEALER_REVEAL': {
         const hole = el.dealerCards.children[1];
         if (hole) flipCard(hole, e.card && (e.card.rank + e.card.suit));
+        setTotal(el.dealerTotal, 0); // reset any stale bump state before the reveal total animates in
         break;
       }
       case 'BET_PLACED': renderBetStack(el.myBetRing, e.amount); el.myBetAmt.textContent = e.amount; break;

@@ -110,6 +110,8 @@ input:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(217,178,90,.18
 .hand-cluster { display:flex; min-height:var(--card-h); align-items:flex-end; }
 .hand-cluster .card:nth-child(n+2) { margin-left:calc(var(--card-w) * -0.4); }
 .hand-cluster.split-extra { margin-top:6px; }
+/* split second hand — always visible once SPLIT fires (was referencing a class that never existed) */
+.hand-cluster.split-second { display:flex; flex-wrap:wrap; gap:10px; }
 .seat-panel { text-align:center; min-width:120px; padding:10px 14px; border-radius:14px;
   background:rgba(4,20,15,.55); border:1px solid rgba(255,255,255,.08); }
 .seat-name { font-size:12px; letter-spacing:1px; color:var(--slate); white-space:nowrap; }
