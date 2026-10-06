@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Blackjack — The Table Is Alive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/table.css" />
+<link rel="stylesheet" href="css/skins.css" />
+</head>
+<body>
+
+<section id="table" class="screen active">
+  <canvas id="ambient" aria-hidden="true"></canvas>
+  <div class="felt" aria-hidden="true">
+    <div class="felt-glow"></div>
+    <svg class="felt-emblem" viewBox="0 0 400 120" aria-hidden="true">
+      <path d="M200 8 L206 20 L200 32 L194 20 Z" fill="rgba(217,178,90,.16)"/>
+      <text x="200" y="72" text-anchor="middle" font-family="Sora" font-size="26" letter-spacing="10" fill="rgba(255,255,255,.05)">BLACKJACK PAYS 3 TO 2</text>
+      <text x="200" y="98" text-anchor="middle" font-family="Sora" font-size="13" letter-spacing="6" fill="rgba(255,255,255,.04)">DEALER STANDS ON ALL 17s</text>
+    </svg>
+  </div>
+
+  <header class="topbar">
+    <div class="room-pill">SESSION <b>LOCAL</b></div>
+    <div class="round-pill">ROUND <b id="roundNum">0</b></div>
+    <div class="top-actions">
+      <button id="soundBtn" class="icon-btn" title="Sound on/off">🔊</button>
+      <button id="skinBtn" class="icon-btn" title="Cycle card skins">✦</button>
+    </div>
+  </header>
+
+  <!-- DEALER -->
+  <div class="dealer-zone" id="dealerZone">
+    <div class="seat-tag seat-dealer"><span class="dot"></span>DEALER</div>
+    <div class="cards-row" id="dealerCards"></div>
+    <div class="total-chip" id="dealerTotal"><span>0</span></div>
+  </div>
+
+  <!-- OPPONENT (solo banner) -->
+  <div class="opp-zone" id="oppZone">
+    <div class="seat-panel solo-panel" id="oppPanel">
+      <div class="seat-name">SOLO TABLE · vs DEALER</div>
+      <div class="seat-bank-sub">House edge is honest. Beat it.</div>
+    </div>
+  </div>
+
+  <!-- CENTER: shoe / discard / banners -->
+  <div class="center-stage">
+    <div class="shoe" id="shoe"><div class="shoe-body"></div><div class="shoe-count" id="deckCount">52</div></div>
+    <div class="discard" id="discardPile"></div>
+    <div class="banner-wrap" id="bannerWrap"><div class="banner" id="banner"></div></div>
+  </div>
+
+  <!-- PLAYER (me) -->
+  <div class="me-zone" id="meZone">
+    <div class="hand-cluster" id="myHand0"></div>
+    <div class="hand-cluster split-second" id="myHand1"></div>
+    <div class="seat-panel" id="myPanel">
+      <div class="seat-name" id="myName">You</div>
+      <div class="seat-bank" id="myBankroll">500</div>
+      <div class="turn-flag turn-you" id="myTurnFlag">YOUR TURN</div>
+    </div>
+    <div class="bet-ring bet-me" id="myBetRing"><span id="myBetAmt"></span></div>
+  </div>
+
+  <!-- CONTROLS -->
+  <footer class="controls" id="controls">
+    <div class="bet-controls hidden" id="betControls">
+      <div class="chip-rack" id="chipRack"></div>
+      <div class="bet-readout">BET <b id="betAmount">0</b></div>
+      <button class="btn btn-gold" id="confirmBet">DEAL</button>
+      <button class="btn btn-ghost" id="clearBet">CLEAR</button>
+    </div>
+    <div class="action-controls hidden" id="actionControls">
+      <button class="btn btn-red"   id="hitBtn">HIT</button>
+      <button class="btn btn-blue"  id="standBtn">STAND</button>
+      <button class="btn btn-gold"  id="doubleBtn">DOUBLE</button>
+      <button class="btn btn-green" id="splitBtn">SPLIT</button>
+    </div>
+    <div class="keys-hint" id="keysHint"><b>1</b> 25 · <b>2</b> 100 · <b>3</b> 250 · <b>4</b> 500 · <b>0</b> ALL-IN · <b>ENTER</b> DEAL · <b>H/S/D/P</b> actions</div>
+    <div class="status-line" id="statusLine">Place your bet to begin.</div>
+  </footer>
+
+  <!-- toast -->
+  <div class="toast hidden" id="toast"></div>
+</section>
+
+<script src="js/engine.js"></script>
+<script src="js/cards.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+/* ═══════ CARD SKINS — cosmetic only; add a skin = one class block here + entry in CARDS.SKINS ═══════ */
+
+/* HOLOGRAPHIC — animated rainbow sheen, masked to the card face */
+.card[data-skin="holo"] .face.front { background: linear-gradient(160deg,#fff 0%,#f4f2ff 55%,#eefcff 100%); }
+.holo-layer { position:absolute; inset:0; border-radius:inherit; pointer-events:none; overflow:hidden; }
+.holo-layer::before { content:""; position:absolute; inset:-40%;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(255,0,190,.14), rgba(0,229,255,.14), rgba(122,255,0,.13), rgba(255,214,0,.14), rgba(255,0,190,.14));
+  filter: blur(6px); animation: holoSpin 7s linear infinite; mix-blend-mode: multiply; }
+.holo-layer::after { content:""; position:absolute; inset:0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.55) 46%, transparent 60%);
+  transform: translateX(-120%); animation: holoSweep 4.2s ease-in-out infinite; }
+@keyframes holoSpin { to { transform: rotate(360deg); } }
+@keyframes holoSweep { 0%,55% { transform: translateX(-120%);} 80%,100% { transform: translateX(120%);} }
+
+/* GOLD — metallic border + shine sweep on settle/important moments */
+.card[data-skin="gold"] .face.front { border: 3px solid #c99a2e; box-shadow: inset 0 0 0 1px #f4dc9a, 0 8px 18px rgba(0,0,0,.35); }
+.card[data-skin="gold"] .corner span:first-child { color:#a8770f !important; }
+.gold-shine { position:absolute; inset:0; border-radius:inherit; pointer-events:none; overflow:hidden; }
+.gold-shine::before { content:""; position:absolute; top:-20%; bottom:-20%; width:38%; left:-45%;
+  background: linear-gradient(105deg, transparent, rgba(255,236,170,.75), transparent);
+  transform: skewX(-18deg); animation: goldPass 5s ease-in-out infinite; }
+@keyframes goldPass { 0%,60% { left:-45%; } 85%,100% { left:115%; } }
+
+/* NEON — dark face, glowing suits, controlled bloom */
+.card[data-skin="neon"] .face.front { background:#101423; border-color:#2a3050; }
+.card[data-skin="neon"] .corner .r, .card[data-skin="neon"] .pips .r, .card[data-skin="neon"] .court-letter.r, .card[data-skin="neon"] .ace-center.r { color:#ff4fa0 !important; text-shadow:0 0 10px rgba(255,79,160,.85); }
+.card[data-skin="neon"] .corner .b, .card[data-skin="neon"] .pips .b, .card[data-skin="neon"] .court-letter.b, .card[data-skin="neon"] .ace-center.b { color:#3ee8ff !important; text-shadow:0 0 10px rgba(62,232,255,.85); }
+.card[data-skin="neon"] .court { border-color:#3ee8ff; box-shadow:0 0 14px rgba(62,232,255,.35) inset; }
+
+/* MYSTIC — decorative frame + drifting rune particles */
+.card[data-skin="mystic"] .face.front { background: linear-gradient(170deg,#fdfbff,#f2ecff); border:2px solid #8d6fd8; outline:1px dashed rgba(141,111,216,.55); outline-offset:-6px; }
+.mystic-runes { position:absolute; inset:0; pointer-events:none; }
+.mystic-runes i { position:absolute; font-style:normal; color:rgba(122,90,220,.55); font-size:11px; animation: runeFloat 5.5s ease-in-out infinite; }
+.mystic-runes i:nth-child(1){ left:8%;  bottom:10%; }
+.mystic-runes i:nth-child(2){ right:9%; top:12%; animation-delay:1.6s; }
+.mystic-runes i:nth-child(3){ left:46%; top:6%;  animation-delay:3.1s; }
+@keyframes runeFloat { 0%,100% { transform:translateY(0); opacity:.25;} 50% { transform:translateY(-7px); opacity:.8;} }
+
+/* hand total chip (created per hand by UI) */
+.hand-total { margin-top:6px; align-self:center; }
+.split-second { display:flex; gap:18px; margin-top:10px; }
